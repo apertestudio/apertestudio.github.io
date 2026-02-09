@@ -1,416 +1,84 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Aperte Studio — Coming Soon" />
-  <title>Aperte Studio — Coming Soon</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Aperte Studio</title>
 
-  <style>
-    :root{
-      --bg1:#0b0f1a;
-      --bg2:#0f172a;
-      --card: rgba(255,255,255,.06);
-      --stroke: rgba(255,255,255,.12);
-      --text: rgba(255,255,255,.92);
-      --muted: rgba(255,255,255,.68);
-      --accent:#7c3aed;
-      --accent2:#22c55e;
-      --shadow: 0 24px 70px rgba(0,0,0,.45);
-      --radius: 22px;
-    }
+<style>
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#efe6d8;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  color:#1d1d1d;
+}
 
-    *{ box-sizing:border-box; }
-    html,body{ height:100%; }
-    body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      color: var(--text);
-      background:
-        radial-gradient(1000px 700px at 15% 20%, rgba(124,58,237,.35), transparent 55%),
-        radial-gradient(900px 600px at 85% 75%, rgba(34,197,94,.22), transparent 55%),
-        linear-gradient(180deg, var(--bg1), var(--bg2));
-      overflow-x:hidden;
-    }
+.container{
+  text-align:center;
+  max-width:500px;
+  padding:40px;
+}
 
-    .noise{
-      pointer-events:none;
-      position:fixed; inset:0;
-      opacity:.06;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-      mix-blend-mode: overlay;
-    }
+.logo{
+  width:160px;
+  margin-bottom:24px;
+}
 
-    .wrap{
-      min-height:100%;
-      display:grid;
-      place-items:center;
-      padding: 28px 18px;
-    }
+h1{
+  margin:0;
+  font-size:28px;
+  letter-spacing:2px;
+}
 
-    .card{
-      width: min(980px, 100%);
-      background: var(--card);
-      border: 1px solid var(--stroke);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(14px);
-      padding: clamp(22px, 4vw, 44px);
-      position:relative;
-      overflow:hidden;
-    }
+.tagline{
+  margin-top:10px;
+  font-size:14px;
+  letter-spacing:2px;
+  opacity:.7;
+}
 
-    .glow{
-      position:absolute; inset:-2px;
-      background: radial-gradient(500px 220px at 20% 10%, rgba(124,58,237,.35), transparent 60%),
-                  radial-gradient(560px 240px at 85% 80%, rgba(34,197,94,.22), transparent 60%);
-      filter: blur(18px);
-      opacity:.9;
-      z-index:0;
-    }
+.links{
+  margin-top:40px;
+}
 
-    .content{ position:relative; z-index:1; }
+a{
+  text-decoration:none;
+  color:#1d1d1d;
+  font-size:14px;
+  letter-spacing:2px;
+  border-bottom:1px solid #1d1d1d;
+  padding-bottom:4px;
+}
 
-    header{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: 16px;
-      margin-bottom: 34px;
-    }
-
-    .brand{
-      display:flex; align-items:center; gap: 12px;
-      text-decoration:none; color:inherit;
-    }
-
-    .mark{
-      width: 42px; height: 42px;
-      border-radius: 14px;
-      display:grid; place-items:center;
-      background: linear-gradient(135deg, rgba(124,58,237,.9), rgba(34,197,94,.65));
-      box-shadow: 0 12px 28px rgba(124,58,237,.25);
-      font-weight: 800;
-      letter-spacing: .02em;
-    }
-
-    .brand span{
-      font-weight: 700;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      font-size: 13px;
-      color: var(--muted);
-    }
-
-    nav{
-      display:flex; gap: 10px; flex-wrap:wrap;
-      justify-content:flex-end;
-    }
-
-    .pill{
-      font-size: 13px;
-      color: var(--muted);
-      text-decoration:none;
-      border: 1px solid rgba(255,255,255,.12);
-      padding: 8px 12px;
-      border-radius: 999px;
-      transition: transform .15s ease, background .15s ease, border-color .15s ease;
-      background: rgba(255,255,255,.03);
-    }
-    .pill:hover{
-      transform: translateY(-1px);
-      background: rgba(255,255,255,.06);
-      border-color: rgba(255,255,255,.18);
-      color: var(--text);
-    }
-
-    .hero{
-      display:grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap: clamp(18px, 3vw, 34px);
-      align-items:center;
-    }
-
-    @media (max-width: 860px){
-      header{ margin-bottom: 24px; }
-      .hero{ grid-template-columns: 1fr; }
-      nav{ justify-content:flex-start; }
-    }
-
-    h1{
-      margin:0 0 10px;
-      font-size: clamp(34px, 5vw, 56px);
-      line-height: 1.06;
-      letter-spacing: -0.02em;
-    }
-
-    .sub{
-      margin:0 0 18px;
-      font-size: clamp(15px, 1.6vw, 18px);
-      color: var(--muted);
-      line-height: 1.6;
-      max-width: 60ch;
-    }
-
-    .badge{
-      display:inline-flex;
-      align-items:center;
-      gap: 10px;
-      padding: 10px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.04);
-      color: rgba(255,255,255,.82);
-      font-size: 13px;
-      margin-bottom: 14px;
-      width: fit-content;
-    }
-    .dot{
-      width: 9px; height: 9px;
-      border-radius: 99px;
-      background: var(--accent2);
-      box-shadow: 0 0 0 6px rgba(34,197,94,.12);
-      animation: pulse 1.8s ease-in-out infinite;
-    }
-    @keyframes pulse{
-      0%,100%{ transform:scale(1); opacity:1;}
-      50%{ transform:scale(1.15); opacity:.7;}
-    }
-
-    .ctaRow{
-      display:flex;
-      gap: 12px;
-      flex-wrap:wrap;
-      margin-top: 10px;
-      align-items:center;
-    }
-
-    .btn{
-      appearance:none;
-      border:0;
-      border-radius: 14px;
-      padding: 12px 16px;
-      font-weight: 650;
-      cursor:pointer;
-      transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
-      text-decoration:none;
-      display:inline-flex;
-      align-items:center;
-      gap: 10px;
-      font-size: 14px;
-    }
-    .btnPrimary{
-      background: linear-gradient(135deg, rgba(124,58,237,.95), rgba(34,197,94,.75));
-      color: #0b0f1a;
-      box-shadow: 0 16px 34px rgba(124,58,237,.25);
-    }
-    .btnPrimary:hover{ transform: translateY(-1px); }
-
-    .btnGhost{
-      background: rgba(255,255,255,.05);
-      border: 1px solid rgba(255,255,255,.12);
-      color: var(--text);
-    }
-    .btnGhost:hover{
-      transform: translateY(-1px);
-      background: rgba(255,255,255,.07);
-      box-shadow: 0 10px 26px rgba(0,0,0,.2);
-    }
-
-    .panel{
-      border-radius: 18px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(10,12,20,.35);
-      padding: 18px;
-    }
-
-    .kpis{
-      display:grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-    }
-    .kpi{
-      padding: 14px;
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.03);
-    }
-    .kpi strong{ display:block; font-size: 18px; }
-    .kpi span{ color: var(--muted); font-size: 13px; }
-
-    .form{
-      margin-top: 14px;
-      display:flex;
-      gap: 10px;
-      flex-wrap:wrap;
-    }
-    .input{
-      flex: 1 1 220px;
-      padding: 12px 12px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(0,0,0,.18);
-      color: var(--text);
-      outline:none;
-    }
-    .input::placeholder{ color: rgba(255,255,255,.45); }
-
-    .small{
-      margin-top: 10px;
-      color: var(--muted);
-      font-size: 12px;
-      line-height:1.5;
-    }
-
-    footer{
-      margin-top: 28px;
-      padding-top: 18px;
-      border-top: 1px solid rgba(255,255,255,.10);
-      display:flex;
-      justify-content:space-between;
-      gap: 10px;
-      flex-wrap:wrap;
-      color: rgba(255,255,255,.55);
-      font-size: 12px;
-    }
-
-    .links a{
-      color: rgba(255,255,255,.65);
-      text-decoration:none;
-      margin-right: 12px;
-    }
-    .links a:hover{ color: var(--text); }
-  </style>
+a:hover{
+  opacity:.6;
+}
+</style>
 </head>
 
 <body>
-  <div class="noise"></div>
 
-  <main class="wrap">
-    <section class="card" role="region" aria-label="Aperte Studio coming soon">
-      <div class="glow"></div>
+<div class="container">
 
-      <div class="content">
-        <header>
-          <a class="brand" href="#top" aria-label="Aperte Studio">
-            <div class="mark">A</div>
-            <div>
-              <div style="font-weight:800; letter-spacing:-0.02em; font-size:16px;">Aperte Studio</div>
-              <span>Creative • Design • Digital</span>
-            </div>
-          </a>
+<img src="assets/logo.png" class="logo" alt="Aperte Studio Logo">
 
-          <nav aria-label="Quick links">
-            <a class="pill" href="#about">About</a>
-            <a class="pill" href="#notify">Notify me</a>
-            <a class="pill" href="#contact">Contact</a>
-          </nav>
-        </header>
+<h1>APERTE STUDIO</h1>
 
-        <div class="hero" id="top">
-          <div>
-            <div class="badge"><span class="dot"></span> Launching soon</div>
-            <h1>Coming soon.<br/>Something fresh is on the way.</h1>
-            <p class="sub">
-              <strong>Aperte Studio</strong> is launching soon. Subscribe and we’ll let you know when we go live —
-              plus a short overview of what we do.
-            </p>
+<div class="tagline">
+PHOTO AND VIDEOGRAPHY
+</div>
 
-            <div class="ctaRow" id="contact">
-              <a class="btn btnPrimary" href="mailto:hello@apertestudio.com?subject=Aperte%20Studio%20-%20Hello">
-                ✉️ Email us
-              </a>
-              <a class="btn btnGhost" href="#notify">🔔 Get notified</a>
-            </div>
+<div class="links">
+<a href="https://instagram.com/apertestudio" target="_blank">
+INSTAGRAM
+</a>
+</div>
 
-            <p class="small">
-              Tip: if you don’t have a domain email yet, you can use a regular Gmail address for now.
-              You can switch to a custom email later.
-            </p>
-          </div>
+</div>
 
-          <aside class="panel" aria-label="Info panel">
-            <div class="kpis" id="about">
-              <div class="kpi">
-                <strong>Brand & Design</strong>
-                <span>Identity, UI/UX, visuals</span>
-              </div>
-              <div class="kpi">
-                <strong>Web & Landing</strong>
-                <span>Fast, modern websites</span>
-              </div>
-              <div class="kpi">
-                <strong>Content</strong>
-                <span>Copy, campaigns, creative</span>
-              </div>
-              <div class="kpi">
-                <strong>Launch support</strong>
-                <span>Strategy + execution</span>
-              </div>
-            </div>
-
-            <div id="notify" style="margin-top:16px;">
-              <div style="font-weight:750; margin-bottom:8px;">Get notified</div>
-              <div style="color:var(--muted); font-size:13px; line-height:1.6;">
-                This is a demo (GitHub Pages) with no backend. If you want real signups later,
-                we can connect this to Mailchimp / ConvertKit / Google Forms.
-              </div>
-
-              <form class="form" onsubmit="return fakeSignup(event)">
-                <input class="input" type="email" id="email" placeholder="Your email address" required />
-                <button class="btn btnPrimary" type="submit">Notify me</button>
-              </form>
-
-              <div class="small" id="msg" role="status" aria-live="polite"></div>
-            </div>
-          </aside>
-        </div>
-
-        <footer>
-          <div>© <span id="year"></span> Aperte Studio. All rights reserved.</div>
-          <div class="links">
-            <a href="#" aria-label="Instagram link">Instagram</a>
-            <a href="#" aria-label="Behance link">Behance</a>
-            <a href="#" aria-label="LinkedIn link">LinkedIn</a>
-          </div>
-        </footer>
-      </div>
-    </section>
-  </main>
-
-  <script>
-    // Auto-update year
-    document.getElementById("year").textContent = new Date().getFullYear();
-
-    // Demo signup (no backend)
-    function fakeSignup(e){
-      e.preventDefault();
-      const email = document.getElementById("email").value.trim();
-      const msg = document.getElementById("msg");
-
-      if(!email){
-        msg.textContent = "Please enter an email address.";
-        return false;
-      }
-
-      msg.textContent = "Thanks! (Demo) You’re on the list. We’ll be in touch soon.";
-      document.getElementById("email").value = "";
-      return false;
-    }
-
-    // Smooth scroll
-    document.querySelectorAll('a[href^="#"]').forEach(a=>{
-      a.addEventListener("click", (e)=>{
-        const id = a.getAttribute("href");
-        if(id.length > 1){
-          const el = document.querySelector(id);
-          if(el){
-            e.preventDefault();
-            el.scrollIntoView({behavior:"smooth", block:"start"});
-          }
-        }
-      });
-    });
-  </script>
 </body>
 </html>
