@@ -6,79 +6,95 @@
 <title>Aperte Studio</title>
 
 <style>
-body{
-  margin:0;
-  height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:#efe6d8;
-  font-family: "Helvetica Neue", Arial, sans-serif;
-  color:#1d1d1d;
-}
+  :root{
+    --bg:#efe6d8;
+    --text:#1d1d1d;
+    --muted: rgba(29,29,29,.68);
+  }
 
-.container{
-  text-align:center;
-  max-width:500px;
-  padding:40px;
-}
+  *{ box-sizing:border-box; }
+  html,body{ height:100%; }
 
-.logo{
-  width:160px;
-  margin-bottom:24px;
-}
+  body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background: var(--bg);
+    color: var(--text);
+    font-family: Georgia, "Times New Roman", Times, serif;
+    overflow:hidden;
+  }
 
-h1{
-  margin:0;
-  font-size:28px;
-  letter-spacing:2px;
-}
+  /* Full-page background logo */
+  .bg-logo{
+    position:fixed;
+    inset:0;
+    background-image: url("logo.png"); /* if your logo is in /assets, use: url("assets/logo.png") */
+    background-repeat:no-repeat;
+    background-position:center;
+    background-size: min(1100px, 92vw);
+    opacity: 0.16;         /* change to 0.10–0.25 if you want */
+    filter: saturate(1) contrast(1.05);
+    pointer-events:none;
+    z-index:0;
+  }
 
-.tagline{
-  margin-top:10px;
-  font-size:14px;
-  letter-spacing:2px;
-  opacity:.7;
-}
+  /* Optional: subtle vignette so text reads well */
+  .vignette{
+    position:fixed;
+    inset:0;
+    background: radial-gradient(circle at center, rgba(239,230,216,0) 0%, rgba(239,230,216,.55) 70%, rgba(239,230,216,.75) 100%);
+    pointer-events:none;
+    z-index:1;
+  }
 
-.links{
-  margin-top:40px;
-}
+  .content{
+    position:relative;
+    z-index:2;
+    text-align:center;
+    padding: 24px 18px;
+    max-width: 640px;
+  }
 
-a{
-  text-decoration:none;
-  color:#1d1d1d;
-  font-size:14px;
-  letter-spacing:2px;
-  border-bottom:1px solid #1d1d1d;
-  padding-bottom:4px;
-}
+  .tagline{
+    margin:0;
+    font-size: 16px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
 
-a:hover{
-  opacity:.6;
-}
+  .links{
+    margin-top: 32px;
+  }
+
+  a{
+    text-decoration:none;
+    color: var(--text);
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--text);
+    padding-bottom: 4px;
+  }
+  a:hover{ opacity:.65; }
 </style>
 </head>
 
 <body>
+  <div class="bg-logo" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
 
-<div class="container">
+  <div class="content">
+    <p class="tagline">Photo and Videography</p>
 
-<img src="logo.png" class="logo" alt="Aperte Studio Logo">
-
-<h1>APERTE STUDIO</h1>
-
-<div class="tagline">
-PHOTO AND VIDEOGRAPHY
-</div>
-
-<div class="links">
-<a href="https://instagram.com/apertestudio" target="_blank">
-INSTAGRAM
-</a>
-</div>
-
-</div>
-
+    <div class="links">
+      <a href="https://instagram.com/apertestudio" target="_blank" rel="noopener">
+        Instagram
+      </a>
+    </div>
+  </div>
 </body>
 </html>
